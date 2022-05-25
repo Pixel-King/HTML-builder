@@ -11,17 +11,6 @@ if (err) throw err;
 fs.mkdir(path.join(__dirname, 'project-dist', 'assets'),{recursive: true}, err =>{
 if (err) throw err;
 });
-fs.mkdir(path.join(__dirname, 'project-dist', 'assets', 'fonts'),{recursive: true}, err =>{
-if (err) throw err;
-});
-fs.mkdir(path.join(__dirname, 'project-dist', 'assets', 'img'),{recursive: true}, err =>{
-if (err) throw err;
-});
-fs.mkdir(path.join(__dirname, 'project-dist', 'assets', 'svg'),{recursive: true}, err =>{
-if (err) throw err;
-});
-
-
 
 (async function createHTML(){
     const template = path.join(__dirname, 'template.html');
@@ -76,6 +65,9 @@ if (err) throw err;
         (err, folders) => {
             if(err){throw err};
             folders.forEach(folder =>{
+                fs.mkdir(path.join(__dirname, 'project-dist', 'assets', folder.name),{recursive: true}, err =>{
+                    if (err) throw err;
+                    });
                 let folderPath = path.join(__dirname, 'assets', folder.name);
                 let copyFolderPath = path.join(__dirname,'project-dist', 'assets', folder.name);
                 fs.readdir(        
